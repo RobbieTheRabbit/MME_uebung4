@@ -24,7 +24,7 @@ var videoCorrectMax = cfg.videoCorrectMax;
 var videoIncorrectNumber = cfg.videoIncorrectNumber;
 
 // start of tests ********************************************************************************
-describe.skip('Task 1.b JSON Error data', function() {
+describe('Task 1.b JSON Error data', function() {
     var videoCorrect1Result = null;
     var videoCorrect2Result = null;
     var videoIDsCleanup = [];
@@ -45,8 +45,8 @@ describe.skip('Task 1.b JSON Error data', function() {
                     should.not.exist(err);
                     res.should.be.json();
                     res.body.should.have.properties(Object.getOwnPropertyNames(videoCorrectMin));
-                    res.body.should.have.property('id').above(0);
-                    res.body.should.have.property('timestamp').within(startDate.getTime(), stopDate.getTime());
+                    res.body.should.have.ownProperty('id').above(0);
+                    res.body.should.have.ownProperty('timestamp').within(startDate.getTime(), stopDate.getTime());
                     res.body.should.have.property('playcount', 0);
                     res.body.should.have.property('ranking', 0);
                     videoCorrect1Result = res.body;

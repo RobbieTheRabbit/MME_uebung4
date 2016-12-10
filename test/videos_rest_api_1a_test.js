@@ -23,13 +23,13 @@ var videoCorrectMin = cfg.videoCorrectMin;
 var videoCorrectMax = cfg.videoCorrectMax;
 
 // start of tests ********************************************************************************
-describe.skip('Task 1.a CRUD', function() {
+describe('Task 1.a CRUD', function() {
     var videoCorrect1Result = null;
     var videoCorrect2Result = null;
     var videoIDsCleanup = [];
     describe('/videos REST API POST', function() {
         // good POSTs
-        it('should save a proper POST (and add all missing fields) and sends back the complete object with id, timestamp etc.', function(done) {
+        it('should save a proper POST and add all missing fields and sends back the complete object with id, timestamp etc.', function(done) {
             request(videoURL)
                 .post('/')
                 .set('Accept-Version', '1.0')
@@ -42,13 +42,13 @@ describe.skip('Task 1.a CRUD', function() {
                     should.not.exist(err);
                     res.should.be.json();
                     res.body.should.have.properties(Object.getOwnPropertyNames(videoCorrectMin));
-                    res.body.should.have.property('id').above(0);
-                    videoCorrect1Result = res.body; // (not part of test) remember result for cleanup later
-                    videoIDsCleanup.push(res.body.id); // (not part of test) remember result for cleanup later
+                    res.body.should.have.ownProperty('id').above(0);
+                    videoCorrect1Result = res.body;
+                    videoIDsCleanup.push(res.body.id);
                     done();
                 })
         });
-        it('should save a proper POST (with all fields) and send back the object with id and timestamp', function(done) {
+        it('should save a proper POST with all fields and send back the object with id and timestamp', function(done) {
             request(videoURL)
                 .post('/')
                 .set('Accept-Version', '1.0')
@@ -63,8 +63,8 @@ describe.skip('Task 1.a CRUD', function() {
                     res.body.should.have.properties(Object.getOwnPropertyNames(videoCorrectMax));
                     res.body.should.have.property('id');
                     res.body.id.should.be.above(0);
-                    res.body.should.have.property('playcount', videoCorrectMax.playcount);
-                    res.body.should.have.property('ranking', videoCorrectMax.ranking);
+                    res.body.playcount.should.equal(videoCorrectMax.playcount);
+                    res.body.ranking.should.equal(videoCorrectMax.ranking);
                     videoCorrect2Result = res.body;
                     videoIDsCleanup.push(res.body.id);
                     done();
@@ -82,7 +82,7 @@ describe.skip('Task 1.a CRUD', function() {
                 .expect(codes.wrongmethod)
                 .end(function(err, res) {
                     should.not.exist(err);
-                    if (res.body && res.body.id) {  // usually your body should be empty if correct implemented
+                    if (res.body && res.body.id) {
                         videoIDsCleanup.push(res.body.id);
                     }
                     done();
@@ -99,7 +99,7 @@ describe.skip('Task 1.a CRUD', function() {
                 .expect(codes.wrongrequest)
                 .end(function(err, res) {
                     should.not.exist(err);
-                    if (res.body && res.body.id) { // usually your body should be empty if correct implemented
+                    if (res.body && res.body.id) {
                         videoIDsCleanup.push(res.body.id);
                     }
                     done();
@@ -149,7 +149,7 @@ describe.skip('Task 1.a CRUD', function() {
         });
 
         // bad PUTs
-        it('should detect a PUT to wrong URL (without id) and answer with code 405', function(done) {
+        it('should detect a PUT to wrong URL without id and answer with code 405', function(done) {
             request(videoURL)
                 .put('/')
                 .set('Accept-Version', '1.0')

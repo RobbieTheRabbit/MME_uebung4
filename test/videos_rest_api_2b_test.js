@@ -25,7 +25,7 @@ var videoCorrect3 = cfg.videoCorrect3;
 var videoCorrect4 = cfg.videoCorrect4;
 
 // start of tests ********************************************************************************
-describe.skip('Task 2.b Limits and Offset', function() {
+describe('Task 2.b Limits and Offset', function() {
     var videoResults = [];
     var totalResults = [];
     var total = 0;
@@ -44,7 +44,7 @@ describe.skip('Task 2.b Limits and Offset', function() {
                 .end(function (err, res) {
                     should.not.exist(err);
                     res.should.be.json();
-                    res.body.should.have.property('id').above(0);
+                    res.body.should.have.ownProperty('id').above(0);
                     videoResults.push(res.body);
                     videoIDsCleanup.push(res.body.id);
                     done();
@@ -62,7 +62,7 @@ describe.skip('Task 2.b Limits and Offset', function() {
                 .end(function (err, res) {
                     should.not.exist(err);
                     res.should.be.json();
-                    res.body.should.have.property('id').above(0);
+                    res.body.should.have.ownProperty('id').above(0);
                     videoResults.push(res.body);
                     videoIDsCleanup.push(res.body.id);
                     done();
@@ -80,7 +80,7 @@ describe.skip('Task 2.b Limits and Offset', function() {
                 .end(function (err, res) {
                     should.not.exist(err);
                     res.should.be.json();
-                    res.body.should.have.property('id').above(0);
+                    res.body.should.have.ownProperty('id').above(0);
                     videoResults.push(res.body);
                     videoIDsCleanup.push(res.body.id);
                     done();
@@ -98,7 +98,7 @@ describe.skip('Task 2.b Limits and Offset', function() {
                 .end(function (err, res) {
                     should.not.exist(err);
                     res.should.be.json();
-                    res.body.should.have.property('id').above(0);
+                    res.body.should.have.ownProperty('id').above(0);
                     videoResults.push(res.body);
                     videoIDsCleanup.push(res.body.id);
                     done();

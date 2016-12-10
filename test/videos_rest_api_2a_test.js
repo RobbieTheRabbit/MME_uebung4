@@ -23,7 +23,7 @@ var videoCorrectMin = cfg.videoCorrectMin;
 var videoCorrectMax = cfg.videoCorrectMax;
 
 // start of tests ********************************************************************************
-describe.skip('Task 2.a Filter', function() {
+describe('Task 2.a Filter', function() {
     var videoCorrect1Result = null;
     var videoCorrect2Result = null;
     var videoIDsCleanup = [];
@@ -42,7 +42,7 @@ describe.skip('Task 2.a Filter', function() {
                     should.not.exist(err);
                     res.should.be.json();
                     res.body.should.have.properties(Object.getOwnPropertyNames(videoCorrectMin));
-                    res.body.should.have.property('id').above(0);
+                    res.body.should.have.ownProperty('id').above(0);
                     videoCorrect1Result = res.body;
                     videoIDsCleanup.push(res.body.id);
                     done();
@@ -76,7 +76,7 @@ describe.skip('Task 2.a Filter', function() {
                     should.not.exist(err);
                     res.should.be.json();
                     res.body.should.have.properties(Object.getOwnPropertyNames(videoCorrectMax));
-                    res.body.should.have.property('id').above(0);
+                    res.body.should.have.ownProperty('id').above(0);
                     videoCorrect2Result = res.body;
                     videoIDsCleanup.push(res.body.id);
                     done();
